@@ -1,0 +1,13 @@
+//sizes
+$computer:                     1170px;
+$tablet:                       768px;
+$phone:                        0px;
+
+//media rule
+$break-computer:               #{' (min-width: ' $computer ')'};
+$break-tablet:                 #{' (min-width: ' $tablet ') and (max-width: ' $computer - 1 ')'};
+$break-phone:                  #{' (min-width: ' $phone ') and (max-width: ' $tablet - 1 ')'};
+
+$break-computer-min:           #{' (min-width: ' $computer ')'};
+$break-tablet-min:             #{' (min-width: ' $tablet ')'};
+$break-phone-min:              #{' (min-width: ' $phone ')'};
