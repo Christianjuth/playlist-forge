@@ -1,0 +1,32 @@
+<div class="col-xs-12 col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-body">
+
+      <form action="/new_tweet" method="POST">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" class="form-control" id="username" placeholder="username">
+        </div>
+        <div class="form-group">
+          <label for="msg">Message</label>
+          <textarea rows="5" type="text" name="msg" class="form-control" id="msg" placeholder="140 characters or less..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-default pull-right">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="col-xs-12 col-md-6">
+  <div class="list-group">
+    <% @all_tweets.each do |tweet| %>
+      <div class="list-group-item">
+        <p class="list-group-item-text">
+          @<%= tweet.username %> - <%= tweet.msg %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
