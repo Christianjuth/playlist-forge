@@ -15,8 +15,8 @@ class ApplicationController < Sinatra::Base
   end
 
   # This function will redirect the user
-  # to the login screen (if enabled) when the 
-  # session[:user_id] is nil else it will 
+  # to the login screen (if enabled) when the
+  # session[:user_id] is nil else it will
   # pass @user as the current user into the
   # requested view
   before do
@@ -53,10 +53,10 @@ class ApplicationController < Sinatra::Base
       when :ajax
         body ({
           success: true,
-          message: "success", 
-          redirect: "/" 
+          message: "success",
+          redirect: "/"
         }.to_json)
-      else 
+      else
         redirect "/"
       end
     else
@@ -64,10 +64,10 @@ class ApplicationController < Sinatra::Base
       when :ajax
         status 500
         body({
-          success: false, 
+          success: false,
           message: error_messages_for(user).to_str
         }.to_json)
-      else 
+      else
         redirect "/"
       end
     end
@@ -75,36 +75,42 @@ class ApplicationController < Sinatra::Base
 
   # This routs the login page to the template
   get "/login" do
-    erb :login
+  redirect to("/auth/spotify")
+    #erb :login
   end
 
-  post "/login" do
-    @user = User.find_by({username: params[:username]})
-    if @user
-      session[:user_id] = @user.id
-      case request_type?
-      when :ajax
-        body({
-          success: true, 
-          message: "success",
-          redirect: "/"
-        }.to_json)
-      else 
-        redirect "/"
-      end
-    else
-      case request_type?
-      when :ajax
-        status 500
-        body({
-          success: false, 
-          message: "Incorrect username or password"
-        }.to_json)
-      else 
-        redirect "/login"
-      end
-    end
+  get '/auth/spotify/callback' do
+    "hello world"
   end
+
+
+#   post "/login" do
+#     @user = User.find_by({username: params[:username]})
+#     if @user
+#       session[:user_id] = @user.id
+#       case request_type?
+#       when :ajax
+#         body({
+#           success: true,
+#           message: "success",
+#           redirect: "/"
+#         }.to_json)
+#       else
+#         redirect "/"
+#       end
+#     else
+#       case request_type?
+#       when :ajax
+#         status 500
+#         body({
+#           success: false,
+#           message: "Incorrect username or password"
+#         }.to_json)
+#       else
+#         redirect "/login"
+#       end
+#     end
+#   end
 
 
   # -- Helpers --
