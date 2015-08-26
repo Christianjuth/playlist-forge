@@ -1,5 +1,6 @@
 node_modules
 npm-debug.log
+.bundle
 
 .sass-cache
 public/css
