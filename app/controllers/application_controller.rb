@@ -90,6 +90,7 @@ end
 
   get '/auth/spotify/callback' do
     binding.pry
+    seesion[:uid] = env["omniauth.auth"][:uid]
     "hello world"
   end
 
