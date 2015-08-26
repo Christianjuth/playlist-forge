@@ -1,5 +1,6 @@
 # Setup environment
 require "./config/environment"
+require 'pry'
 
 # Require models
 # require "./app/models/"
@@ -13,7 +14,7 @@ class ApplicationController < Sinatra::Base
     # Set the session secret
     set :session_secret, "secret"
   end
-  
+
   use OmniAuth::Builder do
   provider :spotify, '6b16bf44a25f452db9167a8e616d2555', '321f70c6fee241318147bb4bf6d3d052'
 end
@@ -88,6 +89,7 @@ end
 #   end
 
   get '/auth/spotify/callback' do
+    binding.pry
     "hello world"
   end
 
