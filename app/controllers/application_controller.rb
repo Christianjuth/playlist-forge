@@ -13,6 +13,10 @@ class ApplicationController < Sinatra::Base
     # Set the session secret
     set :session_secret, "secret"
   end
+  
+  use OmniAuth::Builder do
+  provider :spotify, '6b16bf44a25f452db9167a8e616d2555', '321f70c6fee241318147bb4bf6d3d052'
+end
 
   # This function will redirect the user
   # to the login screen (if enabled) when the
@@ -78,6 +82,10 @@ class ApplicationController < Sinatra::Base
   redirect to("/auth/spotify")
     #erb :login
   end
+
+#   get '/auth/spotify' do
+
+#   end
 
   get '/auth/spotify/callback' do
     "hello world"
