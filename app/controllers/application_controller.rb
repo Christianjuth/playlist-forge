@@ -3,7 +3,7 @@ require "./config/environment"
 require 'pry'
 
 # Require models
-# require "./app/models/"
+require "./app/models/user"
 
 # Set routs
 class ApplicationController < Sinatra::Base
@@ -56,82 +56,30 @@ end
     erb :signup
   end
 
-  post "/signup" do
-    user = User.new({
-      username: params[:username],
-      email:    params[:email],
-      hashed_password: params[:password],
-    })
-    if user.save
-      session[:user_id] = user.id
-      case request_type?
-      when :ajax
-        body ({
-          success: true,
-          message: "success",
-          redirect: "/"
-        }.to_json)
-      else
-        redirect "/"
-      end
-    else
-      case request_type?
-      when :ajax
-        status 500
-        body({
-          success: false,
-          message: error_messages_for(user).to_str
-        }.to_json)
-      else
-        redirect "/"
-      end
-    end
-  end
-
   # This routs the login page to the template
   get "/login" do
-  redirect to("/auth/spotify")
+    redirect to("/auth/spotify")
     #erb :login
   end
 
-#   get '/auth/spotify' do
-
-#   end
-
+  # This rout is triggerd after spotify
+  # oauth authenticates
   get '/auth/spotify/callback' do
-    binding.pry
-    seesion[:uid] = env["omniauth.auth"][:uid]
-    "hello world"
+    @spotify = env["omniauth.auth"]
+    session[:uid] = @spotify[:uid]
+    user = User.find_by(spotify_uid: @spotify[:uid])
+    if user
+      session[:user_id] = user.id
+    else
+      user = User.new({
+        spotify_uid: @spotify[:uid],
+        username: @spotify[:info][:name],
+        email: @spotify[:info][:email]
+      })
+      user.save
+    end
+    redirect "/all-playlists"
   end
-
-
-#   post "/login" do
-#     @user = User.find_by({username: params[:username]})
-#     if @user
-#       session[:user_id] = @user.id
-#       case request_type?
-#       when :ajax
-#         body({
-#           success: true,
-#           message: "success",
-#           redirect: "/"
-#         }.to_json)
-#       else
-#         redirect "/"
-#       end
-#     else
-#       case request_type?
-#       when :ajax
-#         status 500
-#         body({
-#           success: false,
-#           message: "Incorrect username or password"
-#         }.to_json)
-#       else
-#         redirect "/login"
-#       end
-#     end
-#   end
 
 
   # -- Helpers --

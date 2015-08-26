@@ -1,11 +1,15 @@
 source "https://rubygems.org"
 
 gem "sinatra"
-gem 'rspotify'
-gem 'omniauth-spotify'
+gem "activerecord"
+gem "sinatra-activerecord"
+gem "rake"
+gem "rspotify"
+gem "omniauth-spotify"
 
 group :development do
   gem "shotgun"
   gem "pry"
   gem "tux"
+  gem "sqlite3"
 end
