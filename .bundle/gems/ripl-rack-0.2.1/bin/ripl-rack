@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'ripl'
-require 'ripl/rack'
-Ripl.start
