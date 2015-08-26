@@ -6,6 +6,7 @@
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://bootswatch.com/cyborg/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/css/style.css">
 
@@ -16,18 +17,7 @@
 </head>
 <body>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-xs-12 col-lg-8 col-lg-offset-2">
-        <%= ERB.new(File.read("./app/views/components/header.erb")).result(binding) %>
-
-        <div class="row">
-          <div class="col-xs-12">
-            <%= yield %>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <%= yield %>
   </div>
 </body>
 </html>

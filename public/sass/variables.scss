@@ -1,9 +1,19 @@
-//sizes
+$bk:                           #2D2D2D;
+$sidebar:                      #060606;
+
+// Material Design
+$base-color:                   #fff;
+$text-color:                   $base-color;
+$secondary-text-color:         rgba($text-color, .7);
+$hint-text-color:              rgba($text-color, .3);
+$divider-color:                rgba($text-color, .12); 
+
+// Sizes
 $computer:                     1170px;
 $tablet:                       768px;
 $phone:                        0px;
 
-//media rule
+// Media rule
 $break-computer:               #{' (min-width: ' $computer ')'};
 $break-tablet:                 #{' (min-width: ' $tablet ') and (max-width: ' $computer - 1 ')'};
 $break-phone:                  #{' (min-width: ' $phone ') and (max-width: ' $tablet - 1 ')'};

@@ -7,8 +7,50 @@ body, html{
 }
 
 body{
-	padding-top: 15px;
-	@media #{$break-computer}{
-		padding-top: 50px;
-	}
+	background-color: $bk;
+}
+
+.content{
+  padding-top: 25px;
+}
+
+.sidebar{
+  padding-top: 15px;
+  min-height: 100vh;
+  background-color: $sidebar;
+}
+
+.list-group{
+  .list-group-item{
+    border: none;
+    border-bottom: 1px solid $divider-color;
+    border-radius: 0;
+
+    &:last-child{
+      border: none;
+    }
+  }
+  border-radius: 0;
+}
+
+.table,
+.list-group{
+  &.nobk{
+    background: none;
+
+    tr,
+    .list-group-item{
+      background: none;
+    }
+  }
+
+  &.borderless{
+  	border: none;
+
+    tr,
+  	.list-group-item{
+  		border: none;
+  		padding: 4px 15px;
+  	}
+  }
 }

@@ -38,7 +38,17 @@ end
 
   # This routs the home page to the template
   get "/" do
-    erb :index
+    redirect "/all-playlists"
+  end
+
+  # All playlists
+  get "/all-playlists" do
+    erb :all_playlists
+  end
+
+  # Playlist
+  get "/playlist/:id" do
+    erb :playlist
   end
 
   # This routs the signup page to the template
