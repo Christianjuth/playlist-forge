@@ -35,6 +35,7 @@ end
     elsif !auth_pages.include?(request.path)
       @user = User.find(session[:user_id])
     end
+    
   end
 
   # This routs the home page to the template
@@ -61,13 +62,14 @@ end
   # oauth authenticates
   get '/auth/spotify/callback' do
     @spotify = env["omniauth.auth"]
+    binding.pry
     session[:uid] = @spotify[:uid]
     user = User.find_by(spotify_uid: @spotify[:uid])
     if user
       session[:user_id] = user.id
     else
       user = User.new({
-        spotify_uid: @spotify[:uid],
+        spotify_uid: @spotify,
         username: @spotify[:info][:name],
         email: @spotify[:info][:email]
       })
