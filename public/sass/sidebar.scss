@@ -1,0 +1,41 @@
+.sidebar{
+  padding-top: 15px;
+  min-height: 100vh;
+  background-color: $sidebar;
+
+  h4{
+    margin-bottom: 16px;
+  }
+
+  input{
+    background-color: $sidebar;
+    border-radius: 0;
+    margin-bottom: 0;
+
+    &:active{
+      color: $text-color;
+      border-color: $text-color;
+    }
+  }
+
+  .form-group{
+    margin-bottom: 6px;
+  }
+
+  .list-group{
+    &, .list-group-item{
+      border: none;
+      background: none;
+      border-radius: 0;
+    }
+
+    .list-group-item{
+      padding: 7px 12px;
+    }
+
+    .list-group-item:hover{
+      color: $text-color-inverse;
+      background-color: $bk-inverse;
+    }
+  }
+}

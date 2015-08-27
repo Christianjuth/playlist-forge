@@ -47,6 +47,7 @@ end
 
   # All playlists
   get "/all-playlists" do
+    session[:user_id] = 1
     erb :all_playlists
   end
 

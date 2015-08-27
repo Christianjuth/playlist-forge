@@ -1,32 +1,23 @@
 <div class="row">
 	<!-- Sidebar -->
   <div class="sidebar col-xs-3">
-    <div class="row">
-      <div class="col-xs-1">
-        <h4>
-          <a href="/all-playlists">
-            <i class="fa fa-arrow-circle-o-left"></i>
-          </a>
-        </h4>
+    <h4>Playlist Forge</h4>
+    <form class="row" action="/add-to-playlist" method="POST">
+      <input class="hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
+      <div class="form-group col-xs-12">
+        <input class="dark form-control" name="search" type="text" placeholder="Search">
       </div>
-      <div class="col-xs-10">
-        <h4><%= @playlist.name %></h4>
-        <form action="/add-to-playlist" method="POST">
-          <input class="hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
-          <input name="search" type="text">
-          <button type="submit">Add</button>
-        </form>
-<!--         <div class="list-group list-group-sidebar">
-          <a href="#" class="list-group-item">Song 1</a>
-          <a href="#" class="list-group-item">Song 2</a>
-        </div> -->
-      </div>
+      <button class="hidden" type="submit"></button>
+    </form>
+    <div class="list-group list-group-sidebar">
+      <a href="#" class="list-group-item">Suggestion 1<span class="pull-right">+</span></a>
+      <a href="#" class="list-group-item">Suggestion 2<span class="pull-right">+</span></a>
     </div>
   </div>
 
   <!-- Content -->
   <div class="col-xs-9">
-    <div class="content">
+    <div class="content playlist">
 
       <div class="row">
 				<div class="col-xs-2">
@@ -38,7 +29,8 @@
           %>">
 				</div>
 				<div class="col-xs-10">
-					<h2>Playlist</h2>
+					<h4 class="title">Title<%= @playlist.name %></h4>
+          <p><%= @playlist.songs.length %> songs</p>
 				</div>
 			</div>
 			<hr>

@@ -1,70 +1,41 @@
-@import 'variables';
+@import "variables";
 
+// -- Reset --
 body, html{
   margin: 0;
   padding: 0;
   font-family: 'Open Sans', sans-serif;
+  background-color: $bk;
 }
 
-body{
-	background-color: $bk;
+.center-vertically-wrapper{
+  min-height: 100vh;
+  widows: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.center-vertically{
+  width: 100%;
+}
+
+// -- General Styling --
+input,
+input:active{
+  outline: none !important;
 }
 
 .content{
   padding-top: 25px;
 }
 
-.sidebar{
-  padding-top: 15px;
-  min-height: 100vh;
-  background-color: $sidebar;
-}
-
-.list-group{
-  .list-group-item{
-    border: none;
-    border-bottom: 1px solid $divider-color;
-    border-radius: 0;
-
-    &:last-child{
-      border: none;
-    }
-  }
-  border-radius: 0;
-}
-
-
-// Custom classes
-.table,
-.list-group{
-  &.nobk{
-    background: none;
-
-    tr,
-    .list-group-item{
-      background: none;
-    }
-  }
-
-  &.borderless{
-  	border: none;
-
-    tr,
-  	.list-group-item{
-  		border: none;
-  		padding: 4px 15px;
-  	}
-  }
-}
-
-.list-group{
-  &.no-indent .list-group-item{
-    padding-left: 0;
-  }
-}
-
-.list-group-sidebar{
-  @extend .list-group.borderless;
-  @extend .list-group.nobk;
-  @extend .no-indent;
-}
+// -- Other Components --
+@import "sidebar";
+@import "playlist";

@@ -1,9 +1,11 @@
 $bk:                           #2D2D2D;
+$bk-inverse:                   #ffffff;
 $sidebar:                      #080808;
 
 // Material Design
-$base-color:                   #fff;
+$base-color:                   #ffffff;
 $text-color:                   $base-color;
+$text-color-inverse:           #000000;
 $secondary-text-color:         rgba($text-color, .7);
 $hint-text-color:              rgba($text-color, .3);
 $divider-color:                rgba($text-color, .12); 
