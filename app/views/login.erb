@@ -1,20 +1,8 @@
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="row">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
 
-    <form id="login-form" action="/login" method="POST">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" name="username" class="form-control" id="username" placeholder="johnsmith" required>
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" class="form-control" id="password">
-      </div>
-      <div class="pull-right">
-        <a href="/signup" class="btn btn-default">Create account</a>
-        <button type="submit" class="btn btn-success">Login</button>
-      </div>
-    </form>
-    <%= link_to 'Sign in with Spotify', '/auth/spotify' %>
+    <h1>Playlist Forge</h1>
+    <a href="/auth/spotify" class="btn btn-success">Login with spotify</a>
+        
   </div>
 </div>
