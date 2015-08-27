@@ -31,12 +31,12 @@ end
     force_login_page = false
     auth_pages = ["/login","/auth/spotify","/auth/spotify/callback"]
     # Check the session and database for current user
-    if (!session[:user_id] || !User.exists?(session[:user_id])) && !auth_pages.include?(request.path)
+    if !session[:spotify] && !auth_pages.include?(request.path)
       session.destroy
       redirect "/login" if force_login_page
     elsif !auth_pages.include?(request.path)
-      @user = User.find(session[:user_id])
       @spotify = RSpotify::User.new(session[:spotify])
+      @user = User.find_by(spotify_uid: session[:spotify][:uid])
     end
   end
 
