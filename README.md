@@ -5,6 +5,7 @@ Playlist forger is a Sinatra project that helps you create playlists based on ot
 ```shell
   # Install grunt globally
   npm install -g grunt-cli
+  npm install -g mocha
 
   # Install node modules and gems
   npm install
