@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :playlists
   # -- Functions --
 
   # Use this function to destroy table rows
