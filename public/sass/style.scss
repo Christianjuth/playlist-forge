@@ -33,6 +33,8 @@ body{
   border-radius: 0;
 }
 
+
+// Custom classes
 .table,
 .list-group{
   &.nobk{
@@ -53,4 +55,16 @@ body{
   		padding: 4px 15px;
   	}
   }
+}
+
+.list-group{
+  &.no-indent .list-group-item{
+    padding-left: 0;
+  }
+}
+
+.list-group-sidebar{
+  @extend .list-group.borderless;
+  @extend .list-group.nobk;
+  @extend .no-indent;
 }
