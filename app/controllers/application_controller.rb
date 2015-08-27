@@ -4,6 +4,8 @@ require 'pry'
 
 # Require models
 require "./app/models/user"
+require "./app/models/playlist"
+require "./app/models/song"
 
 # Set routs
 class ApplicationController < Sinatra::Base
