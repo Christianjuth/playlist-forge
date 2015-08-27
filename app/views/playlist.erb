@@ -10,11 +10,16 @@
         </h4>
       </div>
       <div class="col-xs-10">
-        <h4>Playlist one</h4>
-        <div class="list-group list-group-sidebar">
+        <h4><%= @playlist.name %></h4>
+        <form action="/add-to-playlist" method="POST">
+          <input class="hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
+          <input name="search" type="text">
+          <button type="submit">Add</button>
+        </form>
+<!--         <div class="list-group list-group-sidebar">
           <a href="#" class="list-group-item">Song 1</a>
           <a href="#" class="list-group-item">Song 2</a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -37,19 +42,19 @@
 					<tr>
             <td></td>
 						<td>Title</td>
-            <td>Artist</td>
             <td>Album</td>
-						<td>Length</td>
+            <td>Artist</td>
 					</tr>
 				</thead>
         <tbody>
-  				<tr>
-            <td><i class="fa fa-play-circle-o fa-1x"></td>
-  					<td>Shut up and Dance</td>
-            <td>Walk the Moon</td>
-            <td>Talking is Hard</td>
-  					<td>3:60</td>
-  				</tr>
+          <% @playlist.songs.each do |song| %>
+            <tr>
+              <td><i class="fa fa-play-circle-o fa-1x"></td>
+              <td><%= song.name %></td>
+              <td><%= song.album %></td>
+              <td><%= song.artist %></td>
+            </tr>
+          <% end %>
         </tbody>
 			</table>
 

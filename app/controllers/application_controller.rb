@@ -52,6 +52,7 @@ end
 
   # Playlist
   get "/playlist/:id" do
+    @playlist = Playlist.find(params[:id])
     erb :playlist
   end
 
@@ -80,7 +81,7 @@ end
 
   # -- Spotify actions --
 
- post "/all-playlists" do
+  post "/all-playlists" do
     erb :all_playlists
   end
 
@@ -91,6 +92,20 @@ end
     })
     playlist.save
     redirect "/"
+  end
+
+  post "/add-to-playlist" do
+    spotify_song = RSpotify::Track.search(params[:search])[0]
+    if spotify_song
+      song = Song.new({
+        name: spotify_song.name,
+        album: spotify_song.album.name,
+        artist: spotify_song.artists[0].name,
+        playlist_id: params[:playlist_id]
+      })
+      song.save
+    end
+    redirect "/playlist/#{params[:playlist_id]}"
   end
 
   post '/search_track' do
