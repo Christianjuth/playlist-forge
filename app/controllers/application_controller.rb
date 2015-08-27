@@ -85,8 +85,16 @@ end
   
   post '/all-playlists' do
     @playlist = Playlist.new({:user_id => session[:user_id], :name => "name"})
-    @playlist.save
     redirect "/"
+  end
+  
+  post '/search' do
+    @track_search = params[:track_search]
+    @tracks = RSpotify::Track.search('#{@track_search}')
+      @tracks.each do |track|
+        puts track.name
+        puts track.album + " " + track.artist
+      end
   end
 
 
