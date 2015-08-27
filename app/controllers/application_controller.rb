@@ -81,6 +81,27 @@ end
     redirect "/all-playlists"
   end
 
+  post '/search' do
+    track_search = params[:track_search]
+    tracks = RSpotify::Track.search('#{track_search}')
+    tracks.each do |track|
+      puts track.name
+      puts track.artist + " " + track.album
+    end
+
+
+
+#     @artist_search = params[:artist_search]
+#     artists = RSpotify::Artist.search('#{@artist_search}')
+#     @artist_search = artists.first
+#       @albums_all = @artist_search.albums
+#         @albums_all.each do |album|
+#           puts ablum.name
+#         end
+  end
+
+
+
 
   # -- Helpers --
 
