@@ -77,22 +77,37 @@ end
 
 
   # -- Spotify actions --
-  
+
  post "/all-playlists" do
     erb :all_playlists
   end
-  
+
   post '/all-playlists' do
     @playlist = Playlist.new({:user_id => session[:user_id], :name => "name"})
     redirect "/"
   end
-  
-  post '/search' do
+
+  post '/search_track' do
     @track_search = params[:track_search]
     @tracks = RSpotify::Track.search('#{@track_search}')
       @tracks.each do |track|
         puts track.name
         puts track.album + " " + track.artist
+      end
+  end
+
+  post '/search_artist' do
+    @artist_search = params[:artist_search]
+    @artist_name = RSpotify::Artist.search('#{@artist_search}')
+    @albums =@artist_name.ablums
+      @albums.each do |album|
+        puts album.name
+      end
+    @album = @albums.name('#{album_name}')
+    @ablum = @album.first
+    @songs = @ablum.tracks
+      @song.each do |song|
+        puts song.name
       end
   end
 
