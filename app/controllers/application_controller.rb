@@ -68,7 +68,7 @@ end
     user = User.find_by(spotify_uid: @spotify[:uid])
     unless user
       user = User.new({
-        spotify_uid: @spotify,
+        spotify_uid: @spotify[:uid],
         username: @spotify[:info][:name],
         email: @spotify[:info][:email]
       })
