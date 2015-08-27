@@ -79,6 +79,15 @@ end
 
   # -- Spotify actions --
   
+ post "/all-playlists" do
+    erb :all_playlists
+  end
+  
+  post '/all-playlists' do
+    @playlist = Playlist.new({:user_id => session[:user_id], :name => "name"})
+    @playlist.save
+    redirect "/"
+  end
 
 
   # -- Helpers --
