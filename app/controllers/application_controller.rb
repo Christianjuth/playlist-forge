@@ -84,7 +84,7 @@ end
     erb :all_playlists
   end
 
-  post '/create-playlists' do
+  post '/create-playlist' do
     @playlist = Playlist.new({:user_id => session[:user_id], :name => "name"})
     redirect "/"
   end
