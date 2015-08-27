@@ -34,6 +34,7 @@ end
       redirect "/login" if force_login_page
     elsif !auth_pages.include?(request.path)
       @user = User.find(session[:user_id])
+      @spotify = RSpotify::User.new(session[:spotify])
     end
   end
 
@@ -61,13 +62,11 @@ end
   # oauth authenticates
   get '/auth/spotify/callback' do
     @spotify = env["omniauth.auth"]
-    session[:uid] = @spotify[:uid]
+    session[:spotify] = @spotify
     user = User.find_by(spotify_uid: @spotify[:uid])
-    if user
-      session[:user_id] = user.id
-    else
+    unless user
       user = User.new({
-        spotify_uid: @spotify[:uid],
+        spotify_uid: @spotify,
         username: @spotify[:info][:name],
         email: @spotify[:info][:email]
       })
