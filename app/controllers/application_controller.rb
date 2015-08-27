@@ -16,8 +16,8 @@ class ApplicationController < Sinatra::Base
   end
 
   use OmniAuth::Builder do
-  provider :spotify, '6b16bf44a25f452db9167a8e616d2555', '321f70c6fee241318147bb4bf6d3d052'
-end
+    provider :spotify, '6b16bf44a25f452db9167a8e616d2555', '321f70c6fee241318147bb4bf6d3d052'
+  end
 
   # This function will redirect the user
   # to the login screen (if enabled) when the
@@ -34,8 +34,9 @@ end
       redirect "/login" if force_login_page
     elsif !auth_pages.include?(request.path)
       @user = User.find(session[:user_id])
+      @spotify = RSpotify::User.new(session[:spotify])
     end
-    
+
   end
 
   # This routs the home page to the template
@@ -62,12 +63,9 @@ end
   # oauth authenticates
   get '/auth/spotify/callback' do
     @spotify = env["omniauth.auth"]
-    binding.pry
-    session[:uid] = @spotify[:uid]
+    session[:spotify] = @spotify
     user = User.find_by(spotify_uid: @spotify[:uid])
-    if user
-      session[:user_id] = user.id
-    else
+    unless user
       user = User.new({
         spotify_uid: @spotify,
         username: @spotify[:info][:name],
@@ -101,7 +99,7 @@ end
 
 
   # -- Spotify actions --
-  
+
 
 
   # -- Helpers --
