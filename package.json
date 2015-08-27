@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "bundle install && grunt default",
-    "test": "{ npm stop && { shotgun -o 0.0.0.0 -p 3000 & } } &> /dev/null && sleep 3 && mocha --timeout 15000",
+    "test": "{ shotgun -o 0.0.0.0 -p 3000 & } &> /dev/null && sleep 3 && mocha --timeout 15000",
     "stop": "kill -9 $(lsof -i tcp:3000 | tail -n 1 | perl -lne 'print $& if /(?<=ruby)\\s+[0-9]+/i')",
     "start": "grunt default && shotgun -o 0.0.0.0 -p 3000"
   },

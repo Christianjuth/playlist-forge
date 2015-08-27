@@ -74,6 +74,7 @@ GEM
     rspotify (1.15.1)
       omniauth-oauth2 (~> 1.1)
       rest-client (~> 1.7)
+    sass (3.4.16)
     shotgun (0.9.1)
       rack (>= 1.0)
     sinatra (1.4.6)
@@ -107,6 +108,7 @@ DEPENDENCIES
   pry
   rake
   rspotify
+  sass
   shotgun
   sinatra
   sinatra-activerecord
