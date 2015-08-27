@@ -101,6 +101,7 @@ end
         name: spotify_song.name,
         album: spotify_song.album.name,
         artist: spotify_song.artists[0].name,
+        spotify_id: spotify_song.id,
         playlist_id: params[:playlist_id]
       })
       song.save

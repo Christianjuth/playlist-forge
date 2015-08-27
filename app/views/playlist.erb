@@ -30,7 +30,12 @@
 
       <div class="row">
 				<div class="col-xs-2">
-					<img class="img-responsive" src="http://netstorage.metrolyrics.com/albums/1700238jpg.jpg">
+					<img class="img-responsive" src="<%=
+            song = @playlist.songs[0]
+            if song
+              RSpotify::Track.find(song.spotify_id).album.images[0]["url"]
+            end
+          %>">
 				</div>
 				<div class="col-xs-10">
 					<h2>Playlist</h2>
