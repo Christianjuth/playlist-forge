@@ -85,7 +85,11 @@ end
   end
 
   post '/create-playlist' do
-    @playlist = Playlist.new({:user_id => session[:user_id], :name => "name"})
+    playlist = Playlist.new({
+      :user_id => @user.id,
+      :name => "untitled"
+    })
+    playlist.save
     redirect "/"
   end
 
