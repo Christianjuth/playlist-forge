@@ -70,7 +70,6 @@ end
   # oauth authenticates
   get '/auth/spotify/callback' do
     @spotify = env["omniauth.auth"]
-    binding.pry
     session[:spotify] = @spotify
     user = User.find_by(spotify_uid: @spotify[:uid])
     unless user
@@ -87,7 +86,6 @@ end
 
   # -- Spotify actions --
   post "/sync-playlist" do
-    binding.pry
   end
 
   post "/all-playlists" do
