@@ -23,11 +23,13 @@
     <!-- search results -->
     <div id="search-results" class="list-group list-group-sidebar">
       <!-- suggestions -->
-      <form action="/add-to-playlist" method="POST">
-        <input class="playlist-id hidden" name="playlist_id" type="text" value="<%=@playlist.id%>">
-        <input class="hidden track-id" type="text" name="track_id" value="4kbj5MwxO1bq9wjT5g9HaA">
-        <button class="list-group-item text">Shut Up and Dance - WALK THE MOON</button>
-      </form>
+      <% @suggestions.each do |suggestion| %>
+        <form action="/add-to-playlist" method="POST">
+          <input class="playlist-id hidden" name="playlist_id" type="text" value="<%=@playlist.id%>">
+          <input class="hidden track-id" type="text" name="track_id" value="<%= suggestion.spotify_id %>">
+          <button class="list-group-item text"><%= "#{suggestion.name} - #{suggestion.artist}" %></button>
+        </form>
+      <% end %>
     </div>
   </div>
 

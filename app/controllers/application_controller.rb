@@ -58,6 +58,18 @@ end
     if first_song
       @playlist_photo = RSpotify::Track.find(first_song.spotify_id).album.images[0]["url"]
     end
+    @suggestions = []
+    spotify_ids = []
+    @playlist.songs.each do |song|
+      spotify_ids.push song.spotify_id
+    end
+    Song.where.not({playlist_id: @playlist.id}).where("spotify_id IN (?)", spotify_ids).each do |song|
+      song.playlist.songs.each do |suggestion|
+        unless spotify_ids.include? suggestion.spotify_id
+          @suggestions.push suggestion
+        end
+      end
+    end
     erb :playlist
   end
 
