@@ -1,6 +1,5 @@
 # Setup environment
 require "./config/environment"
-require 'pry'
 
 # Require models
 require "./app/models/user"
