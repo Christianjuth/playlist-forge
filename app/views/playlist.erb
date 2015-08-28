@@ -13,7 +13,7 @@
     <h5>Add songs</h5>
     <!-- instant search -->
     <form id="instant-search" class="row" action="/search-track" method="POST">
-      <div class="form-group col-xs-12">
+      <div class="form-group col-xs-12 has-success">
         <input class="dark form-control" name="search" type="text" placeholder="Search Spotify..." autocomplete="off">
       </div>
       <button class="hidden" type="submit"></button>
@@ -47,7 +47,10 @@
             <button class="hidden" type="submit"></button>
           </form>
           <p><%= @playlist.songs.length %> songs</p>
-          <button class="btn btn-success">Sync with Spotify</button>
+          <form action="/sync-playlist" method="POST">
+            <input class="hidden" name="playlist_id" type="text" value="<%=@playlist.id%>">
+            <button class="btn btn-success">Sync with Spotify</button>
+          </form>
 				</div>
 			</div>
 			<hr>
