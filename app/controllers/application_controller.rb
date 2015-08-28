@@ -96,7 +96,7 @@ end
   end
 
   post "/add-to-playlist" do
-    spotify_song = RSpotify::Track.search(params[:search])[0]
+    spotify_song = RSpotify::Track.find(params[:track_id])
     if spotify_song
       song = Song.new({
         name: spotify_song.name,
@@ -110,16 +110,12 @@ end
     redirect "/playlist/#{params[:playlist_id]}"
   end
 
-  post '/search_track' do
-    @track_search = params[:track_search]
-    @tracks = RSpotify::Track.search('#{@track_search}')
-      @tracks.each do |track|
-        puts track.name
-        puts track.album + " " + track.artist
-      end
+  post '/search-track' do
+    @tracks = RSpotify::Track.search(params[:search])
+    body(@tracks.to_json)
   end
 
-  post '/search_artist' do
+  post '/search-artist' do
     @artist_search = params[:artist_search]
     @artist_name = RSpotify::Artist.search('#{@artist_search}')
     @albums =@artist_name.ablums

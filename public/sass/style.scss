@@ -8,6 +8,10 @@ body, html{
   background-color: $bk;
 }
 
+button:active{
+  outline: none;
+}
+
 .center-vertically-wrapper{
   min-height: 100vh;
   widows: 100%;

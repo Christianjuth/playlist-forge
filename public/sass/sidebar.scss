@@ -1,6 +1,8 @@
 .sidebar{
   padding-top: 5px;
-  min-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
   background-color: $sidebar;
 
   *{

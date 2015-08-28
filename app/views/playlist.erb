@@ -3,14 +3,14 @@
   <div class="sidebar col-xs-3">
     <h3>Playlist Forge</h3>
     <h5>Add songs</h5>
-    <form class="row" action="/add-to-playlist" method="POST">
-      <input class="hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
+    <form id="instant-search" class="row" action="/search-track" method="POST">
+      <input class="playlist-id hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
       <div class="form-group col-xs-12">
-        <input class="dark form-control" name="search" type="text" placeholder="Search Spotify...">
+        <input class="dark form-control" name="search" type="text" placeholder="Search Spotify..." autocomplete="off">
       </div>
       <button class="hidden" type="submit"></button>
     </form>
-    <div class="list-group list-group-sidebar">
+    <div id="search-results" class="list-group list-group-sidebar">
       <a href="#" class="list-group-item">Suggestion 1<span class="pull-right">+</span></a>
       <a href="#" class="list-group-item">Suggestion 2<span class="pull-right">+</span></a>
     </div>
