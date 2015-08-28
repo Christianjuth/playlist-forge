@@ -122,6 +122,19 @@ end
     redirect "/playlist/#{params[:playlist_id]}"
   end
 
+  post '/sync-playlist' do
+    playlist_id = params[:playlist_id]
+    binding.pry
+    playlist = User.spotify_uid.create_playlist('#{playlist_id}')
+    binding.pry
+    tracks = @playlist.songs
+      tracks.each do |track|
+        track_id = track.spotify_uid
+        playlist.add_track('#{track_id}')
+        binding.pry
+      end
+  end
+
   post '/search-track' do
     @tracks = RSpotify::Track.search(params[:search])
     body(@tracks.to_json)
