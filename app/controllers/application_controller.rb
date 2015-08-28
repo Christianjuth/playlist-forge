@@ -1,6 +1,6 @@
 # Setup environment
 require "./config/environment"
-
+require 'pry'
 
 # Require models
 require "./app/models/user"
@@ -28,15 +28,15 @@ end
   # requested view
   before do
     # Force the user to login before using the app
-    force_login_page = false
+    force_login_page = true
     auth_pages = ["/login","/auth/spotify","/auth/spotify/callback"]
     # Check the session and database for current user
-    if !session[:spotify] && !auth_pages.include?(request.path)
+    if (!session[:spotify] || !User.find_by({spotify_uid: session[:spotify][:uid]})) && !auth_pages.include?(request.path)
       session.destroy
       redirect "/login" if force_login_page
     elsif !auth_pages.include?(request.path)
       @spotify = RSpotify::User.new(session[:spotify])
-      @user = User.find_by(spotify_uid: session[:spotify][:uid])
+      @user = User.find_by({spotify_uid: session[:spotify][:uid]})
     end
   end
 
@@ -52,6 +52,12 @@ end
 
   # Playlist
   get "/playlist/:id" do
+    @playlist = Playlist.find(params[:id])
+    @playlist_photo = ""
+    first_song = @playlist.songs[0]
+    if first_song
+      @playlist_photo = RSpotify::Track.find(first_song.spotify_id).album.images[0]["url"]
+    end
     erb :playlist
   end
 
@@ -80,25 +86,48 @@ end
 
   # -- Spotify actions --
 
- post "/all-playlists" do
+  post "/all-playlists" do
     erb :all_playlists
   end
 
   post '/create-playlist' do
-    @playlist = Playlist.new({:user_id => session[:user_id], :name => "name"})
+    playlist = Playlist.new({
+      :user_id => @user.id,
+      :name => "untitled"
+    })
+    playlist.save
     redirect "/"
   end
 
-  post '/search_track' do
-    @track_search = params[:track_search]
-    @tracks = RSpotify::Track.search('#{@track_search}')
-      @tracks.each do |track|
-        puts track.name
-        puts track.album + " " + track.artist
-      end
+  post "/update-name" do
+    id = params[:id]
+    playlist = Playlist.find(id)
+    playlist.name = params[:name]
+    playlist.save
+    redirect "/playlist/#{id}"
   end
 
-  post '/search_artist' do
+  post "/add-to-playlist" do
+    spotify_song = RSpotify::Track.find(params[:track_id])
+    if spotify_song
+      song = Song.new({
+        name: spotify_song.name,
+        album: spotify_song.album.name,
+        artist: spotify_song.artists[0].name,
+        spotify_id: spotify_song.id,
+        playlist_id: params[:playlist_id]
+      })
+      song.save
+    end
+    redirect "/playlist/#{params[:playlist_id]}"
+  end
+
+  post '/search-track' do
+    @tracks = RSpotify::Track.search(params[:search])
+    body(@tracks.to_json)
+  end
+
+  post '/search-artist' do
     @artist_search = params[:artist_search]
     @artist_name = RSpotify::Artist.search('#{@artist_search}')
     @albums =@artist_name.ablums
