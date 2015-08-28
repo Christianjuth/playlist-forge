@@ -1,24 +1,20 @@
 <div class="row">
-	<!-- Sidebar -->
+  <!-- Sidebar -->
   <div class="sidebar col-xs-3">
-    <div class="row">
-      <div class="col-xs-1">
-      </div>
-      <div class="col-xs-10">
-        <h4>Playlist</h4>
-				<div class="list-group borderless nobk">
-					<% @user.playlists.each do |playlist| %>
-				    <a href="/playlist/<%= playlist.id %>" class="list-group-item">
-				    	<%= playlist.name %>
-				    </a>
-				  <% end %>
-				</div>
-      </div>
-      <div class="col-xs-1">
-      	<form action="/create-playlist" method="POST" >
-          <input type="submit" value="+" class="btn btn-default">
-        </form>
-      </div>
+    <h3>Playlist Forge</h3>
+    <div>
+      <form action="/create-playlist" method="POST" >
+        <h5>Playlists
+          <input class="btn btn-success btn-sm" type="submit" value="+">
+        </h5>
+      </form>
+    </div>
+    <div class="list-group list-group-sidebar">
+      <% @user.playlists.each do |playlist| %>
+      <a href="/playlist/<%= playlist.id %>" class="list-group-item">
+        <%= playlist.name %>
+      </a>
+      <% end %>
     </div>
   </div>
 

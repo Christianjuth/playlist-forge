@@ -1,13 +1,17 @@
 .sidebar{
-  padding-top: 15px;
+  padding-top: 5px;
   min-height: 100vh;
   background-color: $sidebar;
+
+  *{
+    color: $text-color-inverse;
+  }
 
   h4{
     margin-bottom: 16px;
   }
 
-  input{
+  input[type=text]{
     background-color: $sidebar;
     border-radius: 0;
     margin-bottom: 0;
@@ -27,6 +31,7 @@
       border: none;
       background: none;
       border-radius: 0;
+      color: #bbb;
     }
 
     .list-group-item{
@@ -35,7 +40,6 @@
 
     .list-group-item:hover{
       color: $text-color-inverse;
-      background-color: $bk-inverse;
     }
   }
 }

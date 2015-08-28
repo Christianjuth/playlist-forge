@@ -27,15 +27,15 @@ body, html{
 }
 
 // -- General Styling --
-input,
-input:active{
-  outline: none !important;
-}
 
 .content{
-  padding-top: 25px;
+  padding: 25px 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
 }
 
 // -- Other Components --
+@import "text";
 @import "sidebar";
 @import "playlist";

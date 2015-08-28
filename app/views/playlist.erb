@@ -1,11 +1,12 @@
 <div class="row">
 	<!-- Sidebar -->
   <div class="sidebar col-xs-3">
-    <h4>Playlist Forge</h4>
+    <h3>Playlist Forge</h3>
+    <h5>Add songs</h5>
     <form class="row" action="/add-to-playlist" method="POST">
       <input class="hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
       <div class="form-group col-xs-12">
-        <input class="dark form-control" name="search" type="text" placeholder="Search">
+        <input class="dark form-control" name="search" type="text" placeholder="Search Spotify...">
       </div>
       <button class="hidden" type="submit"></button>
     </form>
@@ -20,7 +21,7 @@
     <div class="content playlist">
 
       <div class="row">
-				<div class="col-xs-2">
+				<div class="col-xs-3">
 					<img class="img-responsive" src="<%=
             song = @playlist.songs[0]
             if song
@@ -28,16 +29,16 @@
             end
           %>">
 				</div>
-				<div class="col-xs-10">
-					<h4 class="title">Title<%= @playlist.name %></h4>
+				<div class="col-xs-9">
+					<h3 class="title"><%= @playlist.name %></h3>
           <p><%= @playlist.songs.length %> songs</p>
+          <button class="btn btn-success">Sync with Spotify</button>
 				</div>
 			</div>
 			<hr>
 			<table class="table table-hover nobk">
 				<thead>
 					<tr>
-            <td></td>
 						<td>Title</td>
             <td>Album</td>
             <td>Artist</td>
@@ -46,7 +47,6 @@
         <tbody>
           <% @playlist.songs.each do |song| %>
             <tr>
-              <td><i class="fa fa-play-circle-o fa-1x"></td>
               <td><%= song.name %></td>
               <td><%= song.album %></td>
               <td><%= song.artist %></td>
