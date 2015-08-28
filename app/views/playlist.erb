@@ -1,18 +1,31 @@
+<script id="search-result" type="text/template">
+  <form action="/add-to-playlist" method="POST">
+    <input class="playlist-id hidden" name="playlist_id" type="text" value="<%=@playlist.id%>">
+    <input class="hidden track-id" type="text" name="track_id">
+    <button class="list-group-item text"></button>
+  </form>
+</script>
+
 <div class="row">
 	<!-- Sidebar -->
   <div class="sidebar col-xs-3">
     <h3>Playlist Forge</h3>
     <h5>Add songs</h5>
+    <!-- instant search -->
     <form id="instant-search" class="row" action="/search-track" method="POST">
-      <input class="playlist-id hidden" name="playlist_id" type="text" value="<%= @playlist.id %>">
       <div class="form-group col-xs-12">
         <input class="dark form-control" name="search" type="text" placeholder="Search Spotify..." autocomplete="off">
       </div>
       <button class="hidden" type="submit"></button>
     </form>
+    <!-- search results -->
     <div id="search-results" class="list-group list-group-sidebar">
-      <a href="#" class="list-group-item">Suggestion 1<span class="pull-right">+</span></a>
-      <a href="#" class="list-group-item">Suggestion 2<span class="pull-right">+</span></a>
+      <!-- suggestions -->
+      <form action="/add-to-playlist" method="POST">
+        <input class="playlist-id hidden" name="playlist_id" type="text" value="<%=@playlist.id%>">
+        <input class="hidden track-id" type="text" name="track_id" value="4kbj5MwxO1bq9wjT5g9HaA">
+        <button class="list-group-item text">Shut Up and Dance - WALK THE MOON</button>
+      </form>
     </div>
   </div>
 
@@ -20,22 +33,26 @@
   <div class="col-xs-9">
     <div class="content playlist">
 
+      <!-- playlist header -->
       <div class="row">
+        <!-- playlist photo -->
 				<div class="col-xs-3">
-					<img class="img-responsive" src="<%=
-            song = @playlist.songs[0]
-            if song
-              RSpotify::Track.find(song.spotify_id).album.images[0]["url"]
-            end
-          %>">
+					<img class="img-responsive" src="<%=@playlist_photo%>">
 				</div>
 				<div class="col-xs-9">
-					<h3 class="title"><%= @playlist.name %></h3>
+          <!-- form to change playlist name -->
+          <form id="playlist-name" action="/update-name" method="POST">
+            <input class="h3 title" type="text" name="name" value="<%= @playlist.name %>">
+            <input class="hidden" type="text" name="id" value="<%=@playlist.id%>">
+            <button class="hidden" type="submit"></button>
+          </form>
           <p><%= @playlist.songs.length %> songs</p>
           <button class="btn btn-success">Sync with Spotify</button>
 				</div>
 			</div>
 			<hr>
+
+      <!-- playlist tracks -->
 			<table class="table table-hover nobk">
 				<thead>
 					<tr>

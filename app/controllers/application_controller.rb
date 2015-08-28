@@ -47,13 +47,17 @@ end
 
   # All playlists
   get "/all-playlists" do
-    session[:user_id] = 1
     erb :all_playlists
   end
 
   # Playlist
   get "/playlist/:id" do
     @playlist = Playlist.find(params[:id])
+    @playlist_photo = ""
+    first_song = @playlist.songs[0]
+    if first_song
+      @playlist_photo = RSpotify::Track.find(first_song.spotify_id).album.images[0]["url"]
+    end
     erb :playlist
   end
 
@@ -93,6 +97,14 @@ end
     })
     playlist.save
     redirect "/"
+  end
+
+  post "/update-name" do
+    id = params[:id]
+    playlist = Playlist.find(id)
+    playlist.name = params[:name]
+    playlist.save
+    redirect "/playlist/#{id}"
   end
 
   post "/add-to-playlist" do

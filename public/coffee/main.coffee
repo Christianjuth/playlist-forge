@@ -14,10 +14,8 @@ $(document).ready ->
       # data.redirect contains the string URL to redirect to
       $("#search-results").empty()
       for track in tracks
-        $("#search-results").append("""
-          <form action="/add-to-playlist" method="POST">
-            #{$("#instant-search .playlist-id").prop('outerHTML')}
-            <input class="hidden" type="text" name="track_id" value="#{track.id}">
-            <button class="list-group-item">#{track.name} - #{track.artists[0].name}</button>
-          </form>
-        """)
+        console.log(track)
+        $el = $($("#search-result").html()).clone()
+        $el.find(".track-id").val(track.id)
+        $el.find(".text").text("#{track.name} - #{track.artists[0].name}")
+        $("#search-results").append($el)
