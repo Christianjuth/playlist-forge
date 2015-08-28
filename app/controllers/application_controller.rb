@@ -85,13 +85,6 @@ end
 
 
   # -- Spotify actions --
-  post "/sync-playlist" do
-  end
-
-  post "/all-playlists" do
-    erb :all_playlists
-  end
-
   post '/create-playlist' do
     playlist = Playlist.new({
       :user_id => @user.id,
@@ -119,7 +112,9 @@ end
         spotify_id: spotify_song.id,
         playlist_id: params[:playlist_id]
       })
-      song.save
+      if Playlist.find(params[:playlist_id]).user_id == @user.id
+        song.save
+      end
     end
     redirect "/playlist/#{params[:playlist_id]}"
   end
