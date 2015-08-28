@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
   end
 
   use OmniAuth::Builder do
-  provider :spotify, '6b16bf44a25f452db9167a8e616d2555', '321f70c6fee241318147bb4bf6d3d052'
+  provider :spotify, '6b16bf44a25f452db9167a8e616d2555', '321f70c6fee241318147bb4bf6d3d052', scope: 'user-read-email playlist-modify-public user-library-read user-library-modify'
 end
 
   # This function will redirect the user
@@ -47,6 +47,7 @@ end
 
   # All playlists
   get "/all-playlists" do
+    @featured_playlists = Playlist.all.order("RANDOM()").where.not({user_id: @user.id}).limit(3)
     erb :all_playlists
   end
 
@@ -70,6 +71,7 @@ end
   # oauth authenticates
   get '/auth/spotify/callback' do
     @spotify = env["omniauth.auth"]
+    binding.pry
     session[:spotify] = @spotify
     user = User.find_by(spotify_uid: @spotify[:uid])
     unless user
@@ -85,6 +87,9 @@ end
 
 
   # -- Spotify actions --
+  post "/sync-playlist" do
+    binding.pry
+  end
 
   post "/all-playlists" do
     erb :all_playlists

@@ -1,7 +1,9 @@
 <div class="row">
   <!-- Sidebar -->
   <div class="sidebar col-xs-3">
-    <h3>Playlist Forge</h3>
+    <a class="logo" href="/">
+      <h3>Playlist Forge</h3>
+    </a>
     <div>
       <form action="/create-playlist" method="POST" >
         <h5>Playlists
@@ -21,12 +23,24 @@
   <!-- Content -->
   <div class="col-xs-9">
     <div class="content">
-      <h3 class=title>Featured Platlists</h3>
+      <h3 class=title>Featured</h3>
       <hr>
        <div class="row">
-        <div class="col-xs-3">
-          <img src="http://www.bunchofgrapes-knightsbridge.co.uk/sites/default/files/events/images/the-strokes-the-strokes-23203114-500-477.png" class="img-responsive">
-        </div>
+         <% @featured_playlists.each do |playlist|
+              song = playlist.songs.first
+              unless song.nil?
+                song = RSpotify::Track.find(song.spotify_id)
+                image = song.album.images[0]["url"]
+              else
+                next
+              end
+         %>
+          <div class="col-xs-3">
+            <a href="/playlist/<%= playlist.id %>">
+              <img src="<%= image %>" class="img-responsive">
+            </a>
+          </div>
+         <% end %>
       </div>
     </div>
     </div>

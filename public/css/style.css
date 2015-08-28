@@ -43,6 +43,9 @@ body {
     font-weight: 600; }
   body .title {
     margin-top: 0; }
+  body .logo,
+  body .logo:active {
+    text-decoration: none !important; }
   body .h3 {
     font-weight: 600;
     font-size: 34px;
