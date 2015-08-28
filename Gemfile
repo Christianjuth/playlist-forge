@@ -7,6 +7,8 @@ gem "rake"
 gem "rspotify"
 gem "omniauth-spotify"
 gem "sass"
+gem 'pg'
+
 
 group :development do
   gem "shotgun"
