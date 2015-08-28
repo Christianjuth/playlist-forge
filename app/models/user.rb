@@ -6,5 +6,6 @@ class User < ActiveRecord::Base
   # belonging to the user before the user is
   # deleted
   before_destroy do |user|
+    user.playlists.destroy_all
   end
 end
